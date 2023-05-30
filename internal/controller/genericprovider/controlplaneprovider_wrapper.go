@@ -28,42 +28,52 @@ const (
 )
 
 type ControlPlaneProviderWrapper struct {
+	//nolint: dupl
 	*operatorv1.ControlPlaneProvider
 }
 
 func (c *ControlPlaneProviderWrapper) GetConditions() clusterv1.Conditions {
+	//nolint: dupl
 	return c.Status.Conditions
 }
 
 func (c *ControlPlaneProviderWrapper) SetConditions(conditions clusterv1.Conditions) {
+	//nolint: dupl
 	c.Status.Conditions = conditions
 }
 
 func (c *ControlPlaneProviderWrapper) GetSpec() operatorv1.ProviderSpec {
+	//nolint: dupl
 	return c.Spec.ProviderSpec
 }
 
 func (c *ControlPlaneProviderWrapper) SetSpec(in operatorv1.ProviderSpec) {
+	//nolint: dupl
 	c.Spec.ProviderSpec = in
 }
 
 func (c *ControlPlaneProviderWrapper) GetStatus() operatorv1.ProviderStatus {
+	//nolint: dupl
 	return c.Status.ProviderStatus
 }
 
 func (c *ControlPlaneProviderWrapper) SetStatus(in operatorv1.ProviderStatus) {
+	//nolint: dupl
 	c.Status.ProviderStatus = in
 }
 
 func (c *ControlPlaneProviderWrapper) GetObject() client.Object {
+	//nolint: dupl
 	return c.ControlPlaneProvider
 }
 
 type ControlPlaneProviderListWrapper struct {
+	//nolint: dupl
 	*operatorv1.ControlPlaneProviderList
 }
 
 func (c *ControlPlaneProviderListWrapper) GetItems() []GenericProvider {
+	//nolint: dupl
 	providers := []GenericProvider{}
 	for _, provider := range c.Items {
 		providers = append(providers, &ControlPlaneProviderWrapper{&provider})
@@ -73,5 +83,6 @@ func (c *ControlPlaneProviderListWrapper) GetItems() []GenericProvider {
 }
 
 func (c *ControlPlaneProviderListWrapper) GetObject() client.ObjectList {
+	//nolint: dupl
 	return c.ControlPlaneProviderList
 }

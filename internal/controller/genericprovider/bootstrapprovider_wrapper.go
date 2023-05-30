@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Each provider has its own wrapper, so this is ok
+//nolint: dupl
+
 package genericprovider
 
 import (

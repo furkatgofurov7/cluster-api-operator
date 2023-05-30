@@ -25,10 +25,10 @@ linters:
     - contextcheck
     # - cyclop
     - dogsled
-    # - dupl
+    - dupl
     - durationcheck
     - errname
-    # - errorlint
+    - errorlint
     - exhaustive
     # - exportloopref
     - forcetypeassert
@@ -57,7 +57,7 @@ linters:
     - nolintlint
     - prealloc
     - predeclared
-    # - revive
+    - revive
     - tagliatelle
     - tenv
     - unconvert
@@ -66,6 +66,9 @@ linters:
     # - wrapcheck
     - wsl
 linters-settings:
+  dupl:
+    # tokens count to trigger issue, 150 by default
+    threshold: 200
   goheader:
     values:
       regexp:
@@ -87,14 +90,37 @@ linters-settings:
   nlreturn:
     block-size: 2
   revive:
-    confidence: 0
     rules:
-    - name: exported
-      severity: warning
-      disabled: false
-      arguments:
-        - "checkPrivateReceivers"
-        - "disableStutteringCheck"
+      # The following rules are recommended https://github.com/mgechev/revive#recommended-configuration
+      - name: blank-imports
+      - name: context-as-argument
+      - name: context-keys-type
+      - name: dot-imports
+      - name: error-return
+      - name: error-strings
+      - name: error-naming
+      - name: exported
+      - name: if-return
+      - name: increment-decrement
+      - name: var-naming
+      - name: var-declaration
+      - name: package-comments
+      - name: range
+      - name: receiver-naming
+      - name: time-naming
+      - name: unexported-return
+      - name: indent-error-flow
+      - name: errorf
+      - name: empty-block
+      - name: superfluous-else
+      - name: unused-parameter
+      - name: unreachable-code
+      - name: redefines-builtin-id
+      #
+      # Rules in addition to the recommended configuration above.
+      #
+      - name: bool-literal-in-expr
+      - name: constant-logical-expr
   stylecheck:
     # https://staticcheck.io/docs/options#checks
     checks: ["all", "-ST1000"]
@@ -138,11 +164,29 @@ issues:
     - "missing cases in switch of type v1.PlatformType: (\\.*)"
   exclude-use-default: false
   exclude-rules:
-    # Exclude some linters from running on tests files.
-    - path: _test\.go
-      linters:
-        - gocyclo
-        - dupl
-        - gosec
-        - gochecknoglobals
-        - goerr113
+  # Exclude some linters from running on tests files.
+  - path: _test\.go
+    linters:
+      - gocyclo
+      - dupl
+      - gosec
+      - gochecknoglobals
+      - goerr113
+  - linters:
+    - revive
+    # Exported function and methods should have comments. This warns on undocumented exported functions and methods.
+    text: exported (method|function|type|const) (.+) should have comment or be unexported
+    # Ignoring stylistic checks for generated code
+    path: .*(api/v1alpha1|types)\/.*\/conversion.*\.go$
+  - linters:
+    - revive
+    # This rule warns when initialism, variable or package naming conventions are not followed.
+    text: "var-naming: don't use underscores in Go names;"
+    # Ignoring stylistic checks for generated code
+    path: .*(api/v1alpha1|types)\/.*\/conversion.*\.go$
+  - linters:
+    - revive
+    # By convention, receiver names in a method should reflect their identity.
+    text: "receiver-naming: receiver name"
+    # Ignoring stylistic checks for generated code
+    path: .*(api/v1alpha1|types)\/.*\/conversion.*\.go$

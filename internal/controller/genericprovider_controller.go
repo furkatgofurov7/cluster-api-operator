@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/pkg/errors"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	kerrors "k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/client-go/rest"
@@ -34,6 +35,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
+)
+
+var (
+	errPhase *PhaseError
 )
 
 type GenericProviderReconciler struct {
@@ -140,9 +145,8 @@ func (r *GenericProviderReconciler) reconcile(ctx context.Context, provider gene
 	for _, phase := range phases {
 		res, err = phase(ctx)
 		if err != nil {
-			se, ok := err.(*PhaseError)
-			if ok {
-				conditions.Set(provider, conditions.FalseCondition(se.Type, se.Reason, se.Severity, err.Error()))
+			if errors.As(err, &errPhase) {
+				conditions.Set(provider, conditions.FalseCondition(errPhase.Type, errPhase.Reason, errPhase.Severity, err.Error()))
 			}
 		}
 
@@ -172,9 +176,8 @@ func (r *GenericProviderReconciler) reconcileDelete(ctx context.Context, provide
 	for _, phase := range phases {
 		res, err = phase(ctx)
 		if err != nil {
-			se, ok := err.(*PhaseError)
-			if ok {
-				conditions.Set(provider, conditions.FalseCondition(se.Type, se.Reason, se.Severity, err.Error()))
+			if errors.As(err, &errPhase) {
+				conditions.Set(provider, conditions.FalseCondition(errPhase.Type, errPhase.Reason, errPhase.Severity, err.Error()))
 			}
 		}
 
