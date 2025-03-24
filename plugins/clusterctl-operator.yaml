@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: operator
 spec:
-  version: v0.17.1
+  version: v0.16.0
   homepage: https://github.com/kubernetes-sigs/cluster-api-operator
   shortDescription: Use this clusterctl plugin to bootstrap a management cluster for Cluster API with the Cluster API Operator.
   description: |
@@ -13,36 +13,36 @@ spec:
       matchLabels:
         os: darwin
         arch: amd64
-    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.17.1/clusterctl-operator_v0.17.1_darwin_amd64.tar.gz
-    sha256: ba58fbdf5b79689573e87443801b6a89d3720bdca519cfc9808a83db13c5eef4
+    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.16.0/clusterctl-operator_v0.16.0_darwin_amd64.tar.gz
+    sha256: f8bf8116937f4f956299d447e35383f4e3f0205704f670e7144a24f3f04da1fc
     bin: bin/clusterctl-operator
   - selector:
       matchLabels:
         os: darwin
         arch: arm64
-    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.17.1/clusterctl-operator_v0.17.1_darwin_arm64.tar.gz
-    sha256: 6bc7002f6b96320f51835925a43302085b8e11bf4ab3e515da46ca665c223703
+    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.16.0/clusterctl-operator_v0.16.0_darwin_arm64.tar.gz
+    sha256: 172e6984547b00f9ffce8a11258b552cf57a829352689743d28969dbc9a3f9a2
     bin: bin/clusterctl-operator
   - selector:
       matchLabels:
         os: linux
         arch: amd64
-    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.17.1/clusterctl-operator_v0.17.1_linux_amd64.tar.gz
-    sha256: e2b9b2bb0208e2612ac3cbeaa2cda3881128394b7ca6c1644cf946170f2dac04
+    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.16.0/clusterctl-operator_v0.16.0_linux_amd64.tar.gz
+    sha256: 3c4c0c3fc2001f1f00475c62bfb0c84bcb2f215ba5414baa77a24194d4345487
     bin: bin/clusterctl-operator
   - selector:
       matchLabels:
         os: linux
         arch: arm64
-    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.17.1/clusterctl-operator_v0.17.1_linux_arm64.tar.gz
-    sha256: f980e00fa92dd9ec5647794d51c8064d38be78c0d8d58212874f3b07eb7bdba7
+    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.16.0/clusterctl-operator_v0.16.0_linux_arm64.tar.gz
+    sha256: 179147501c3add624eba437cdf2d6e59e977ae6a4db48d7af36f4912e7ba6ca0
     bin: bin/clusterctl-operator
   - selector:
       matchLabels:
         os: windows
         arch: amd64
-    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.17.1/clusterctl-operator_v0.17.1_windows_amd64.tar.gz
-    sha256: 42376a61146fc73394d92392744c22f652ba94afe1a80890c77b020e1b438254
+    uri: https://github.com/kubernetes-sigs/cluster-api-operator/releases/download/v0.16.0/clusterctl-operator_v0.16.0_windows_amd64.tar.gz
+    sha256: 4e68c303d4b1beca39030d6857f913314481d23f26bc61eaedf300d188afe48b
     bin: bin/clusterctl-operator.exe
 
 
